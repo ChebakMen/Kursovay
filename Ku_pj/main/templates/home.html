@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+<h1>Метод Идеальной Точки</h1>
+<form method="POST" action="{% url 'set_counts' %}">
+    {% csrf_token %}
+    <label>Введите количество альтернатив:</label>
+    <input type="number" name="num_alternatives" required min="1"><br>
+
+    <label>Введите количество критериев:</label>
+    <input type="number" name="num_criteria" required min="1"><br>
+
+    <label>Введите количество экспертов':</label>
+    <input type="number" name="num_experts" required min="1"><br>
+    <button type="submit">Далее</button>
+</form>
+</body>
+</html>

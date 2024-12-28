@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Добавить Экспертов</title>
+</head>
+<body>
+
+<h1>Добавьте Экспертов</h1>
+
+<form method="POST">
+   {% csrf_token %}
+   {% for form in forms %}
+       <div>
+           {{ form.name.label }} {{ form.name }}<br>
+           {{ form.weight.label }} {{ form.weight }}<br>
+       </div>
+       <hr>
+   {% endfor %}
+   <button type="submit">Сохранить Экспертов</button>
+</form>
+
+
+</body>
+</html>

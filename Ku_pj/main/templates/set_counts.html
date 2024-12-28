@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Задать Количество</title>
+</head>
+<body>
+
+<h1>Задайте Количество Альтернатив и Критериев</h1>
+
+<form method="POST">
+   {% csrf_token %}
+   <label for="num_alternatives">Количество альтернатив:</label>
+   <input type="number" name="num_alternatives" required><br>
+
+   <label for="num_criteria">Количество критериев:</label>
+   <input type="number" name="num_criteria" required><br>
+
+   <label for="num_experts">Количество экспертов:</label>
+   <input type="number" name="num_experts" required><br>
+
+   <button type="submit">Продолжить</button>
+</form>
+
+<a href="{% url 'home' %}">Вернуться на главную страницу</a>
+
+</body>
+</html>

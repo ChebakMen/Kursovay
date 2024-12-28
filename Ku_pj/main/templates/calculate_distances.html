@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Расчет Расстояний</title>
+   <style>
+       table {
+           width: 50%;
+           border-collapse: collapse;
+           margin-bottom: 20px;
+       }
+       th, td {
+           padding: 10px;
+           text-align: center;
+           border: 1px solid #ddd;
+       }
+       th {
+           background-color: #f2f2f2;
+       }
+   </style>
+</head>
+<body>
+
+<h1>Расчет расстояний альтернатив от идеальной точки</h1>
+
+<h2>Обобщенные оценки по критериям</h2>
+<table>
+    <tr>
+        <th>Альтернатива</th>
+        {% for criterion in criteria %}
+            <th>{{ criterion.name }}</th>
+        {% endfor %}
+    </tr>
+
+    {% for entry in aggregated_scores_list %}
+    <tr>
+        <td>{{ entry.alternative.name }}</td>
+        {% for score in entry.scores %}
+            <td>{{ score|default:0 }}</td> <!-- Получаем обобщенную оценку -->
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Нормализованные оценки и расстояния до идеальной точки</h2>
+<table>
+    <tr>
+        <th>Альтернатива</th>
+        <th>Расстояние до идеальной точки</th>
+        <th>Нормализованные оценки</th>
+        <th>Коэффициент вариации (%)</th> <!-- Новая колонка для CV -->
+    </tr>
+
+    {% for entry in distances %}
+    <tr>
+        <td>{{ entry.alternative.name }}</td>
+        <td>{{ entry.distance }}</td>
+        <td>{{ entry.normalized_scores|join:", " }}</td> <!-- Отображаем нормализованные оценки -->
+        <td>{{ entry.consistency_scores|join:", " }}</td> <!-- Отображаем коэффициенты вариации -->
+    </tr>
+    {% endfor %}
+</table>
+
+<h3 style="font-size: 24px; font-weight: bold;">Наименьшее расстояние до идеальной точки имеет альтернатива:
+<span style="color: blue;">{{ winning_alternative }}</span> со значением
+<span style="color: red;">{{ max_distance }}</span></h3>
+
+</body>
+</html>

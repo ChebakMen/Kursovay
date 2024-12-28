@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Добавить Критерий</title>
+</head>
+<body>
+
+<h1>Добавить Критерий</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {% for form in forms %}
+        <div>
+            <h3>Критерий {{ forloop.counter }}</h3>
+            {{ form.name.label }} {{ form.name }}<br>
+            {{ form.preference_type.label }} {{ form.preference_type }}<br>
+            {{ form.importance.label }} {{ form.importance }}<br>
+            {{ form.max_value.label }} {{ form.max_value }}<br> <!-- Поле для max_value -->
+            {{ form.min_value.label }} {{ form.min_value }}<br> <!-- Поле для min_value -->
+        </div>
+    {% endfor %}
+    <button type="submit">Сохранить</button>
+</form>
+
+</body>
+</html>

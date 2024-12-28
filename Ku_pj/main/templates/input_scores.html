@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <title>Ввод Оценок Экспертов</title>
+</head>
+<body>
+<h1>Введите Оценки Экспертов</h1>
+
+{% if current_expert %}
+<h2>Эксперт: {{ current_expert.name }}</h2>
+{% endif %}
+
+<form method="POST">
+   {% csrf_token %}
+   <table border="1">
+       <tr>
+           <th>Альтернатива / Критерий</th>
+           {% for criterion in criteria %}
+               <th>{{ criterion.name }}</th>
+           {% endfor %}
+       </tr>
+
+       <tr>
+           <td>Важность</td>
+           {% for criterion in criteria %}
+               <td>{{ criterion.importance }}</td>
+           {% endfor %}
+       </tr>
+
+       {% for i in indices %}
+           <tr>
+               <td>{{ alternatives|slice:i|last }} </td>
+               {% for j in range_criteria %}
+                   <td><input type="number" name="score_{{ i }}_{{ j }}" required></td>
+               {% endfor %}
+           </tr>
+       {% endfor %}
+
+       <tr>
+           <td>Макс.</td>
+           {% for criterion in criteria %}
+               <td>{{ criterion.max_value }}</td>
+           {% endfor %}
+       </tr>
+
+       <tr>
+           <td>Мин.</td>
+           {% for criterion in criteria %}
+               <td>{{ criterion.min_value }}</td>
+           {% endfor %}
+       </tr>
+   </table>
+
+   <button type="submit">Сохранить Оценки</button>
+</form>
+
+</body>
+</html>

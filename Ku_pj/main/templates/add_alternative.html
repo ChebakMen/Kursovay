@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Добавить Альтернативы</title>
+</head>
+<body>
+<h1>Добавьте Альтернативы</h1>
+<form method="POST">
+   {% csrf_token %}
+   {% for form in forms %}
+       {{ form.name.label }}<br />
+       {{ form.name }}<br /><br />
+   {% endfor %}
+   <button type="submit">Сохранить Альтернативы</button>
+</form>
+</body>
+</html>
